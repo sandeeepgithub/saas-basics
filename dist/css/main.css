@@ -1,4 +1,5 @@
 body {
-  background: #ccc;
+  background: #ccc body p;
+  background-font-size: 25px;
 }
 /*# sourceMappingURL=main.css.map */

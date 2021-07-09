@@ -1,3 +1,7 @@
 body {
     background: #ccc
+
+    & p {
+        font-size: 25px;
+    }
 }
