@@ -1,7 +1,180 @@
 body {
-    background: #ccc
+    background: #ccc;
+    text-align: center;
+}
 
-    & p {
-        font-size: 25px;
+.box {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+
+// ------------- variables -------------
+$one: red;
+$two: blue;
+$three: yellow;
+$margin: 10px;
+
+.one {
+    background: $one;
+}
+.two {
+    background: $two;
+}
+.three {
+    background: $three;
+}
+
+// ------------- map -------------
+$font-weights : (
+    "regular": 400,
+    "medium": 500,
+    "bold": 700
+);
+
+.text-1 {
+    font-weight: map-get($font-weights, bold );
+}
+
+// ------------- nesting -------------
+.boxes {
+    display: flex;
+
+    .one {
+        box-shadow: 0 4px 4px #000;
     }
+
+    .two {
+        border-radius: 25px;
+    }
+}
+
+.circle {
+    display: flex;
+
+    &-1 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid darkcyan;
+        background: darkcyan;
+        border-radius: 50%;
+        margin: $margin;
+
+    }
+}
+
+.circle {
+    #{&}-2 {
+        width: 50px;
+        height: 50px;
+        border: 1px solid darkmagenta;
+        background: darkmagenta;
+        border-radius: 50%;
+        margin: $margin;
+
+        &:hover {
+            background: darkseagreen;
+        }
+    }
+};
+
+// ------------- imports -------------
+@import './rectangle.scss';
+
+// ------------- functions -------------
+
+@function font-sizes($size) {
+    @return map-get($font-sizes, $size );
+};
+
+$font-sizes: (
+    "small": 16px,
+    "medium": 20px,
+    "large": 25px
+);
+
+.text-2 {
+    font-size: font-sizes(large);
+};
+
+// ------------- mixins -------------
+// when there are some css that are used in same way multiple times
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+};
+
+.mixins {
+    @include flexCenter;
+}
+
+
+// mixin as a function
+@mixin design( $background-color) {
+    width: 100px;
+    height: 70px;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 50%;
+    background: $background-color;
+}
+
+.oval-1 {
+    @include design(lightcoral);
+}
+
+.oval-2 {
+    @include design(darkorange);
+}
+
+.oval-3 {
+    @include design(black)
+}
+
+// mixin as conditional rendering
+@mixin theme($light: true) {
+    @if $light {
+        background: lighten($color: #000000, $amount: 100%);
+        color: darken($color: #fff, $amount: 100%);
+    } @else  {
+        background: darken($color: #fff, $amount: 100%);
+        color: lighten($color: #000000, $amount: 100%);
+    }
+}
+
+.oval-3 {
+    @include theme($light:false)
+}
+
+// can also be used in responsive => check video
+
+// ------------- extend -------------
+.rect-border {
+    @include flexCenter;
+}
+.oval-4 {
+    @include design(darkkhaki)
+}
+.oval-5 {
+    @extend .oval-4;
+    background: darkolivegreen; // override a property
+
+    &:hover {
+        background: lightslategray; // add new property
+    }
+}
+
+// ------------- operations/calculations -------------
+// the prefix needs to be the same % %, px px etc
+.big-rectangle {
+    @include design(darkorchid);
+    // width: calc(100% - 400px) correct for css
+    // width: calc(100% - 400px) wrong for sass
+    width: 100% - 50%;
+    height: 40px;
+    border-radius: 10px;
 }

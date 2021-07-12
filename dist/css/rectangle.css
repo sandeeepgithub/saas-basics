@@ -1,0 +1,21 @@
+.imported {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.imported .rectangle {
+  width: 100px;
+  height: 30px;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.imported .rectangle-1 {
+  background: green;
+}
+
+.imported .rectangle-2 {
+  background: hotpink;
+}
+/*# sourceMappingURL=rectangle.css.map */

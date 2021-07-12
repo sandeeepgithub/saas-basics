@@ -1,0 +1,21 @@
+// underscore so that it doesn't generate another main.css file
+
+.imported {
+    display: flex;
+
+    .rectangle {
+        width: 100px;
+        height: 30px;
+        border: 1px solid black;
+        margin: 20px;
+
+        &-1 {
+            background: green;
+        }
+
+        &-2 {
+            background: hotpink;
+            
+        }
+    }
+}
